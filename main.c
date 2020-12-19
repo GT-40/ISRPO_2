@@ -60,32 +60,48 @@ void *delete(list *head, int &_d){
 	}
 }
 
-list *find(list *head, int &_d)
+//добавить функцию print для списка
+
+list *find(list *head, int &_d) //изенить тип на void
 {
 	list *p = head;
 	while(p)
 	{
 		if(p->d.ID==_d)
-			return p;
+			return p; //addData для изменения вмсето return
 		p=p->next;
 	}
-	return 0;
+	return 0;// здесть return оставить пустым
 }
 
 int main(){
 	int command;
 	int i=-1;
+	int err;
 	printf();
-	scanf();
+	do{
+	do{
+		scanf();
+		if(errno!=0)err=errno;
+	}while(command<1||)command>5
 	if(command==1){}
 	else if(command==2){}
 	else if(command==3){}
 	else if(command==4){}
+	}while(command!=5)
 }
 
 Data addAppData(int i){
 	Data appData;
-        appData.ID = i;
+        char* date;
+	char* time;
+	char* object;
+	char* applicant;
+	char* application;
+	char* answerDate;
+	char* answerText;
+
+	appData.ID = i;
 	appData.date = addDate();
  	appData.time = addTime();
 	appData.object	

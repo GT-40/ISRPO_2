@@ -73,31 +73,69 @@ char* addTime(){
 	char* time;
 	int hour;
 	int min;
+	int err;
 	do{
+		printf();
 		scanf("%d",&min);
-	}while(min<0||min>59);
-	do{
-		scanf("%d",&hour);
-	}while(hour<0||hour>23)	;
-	sprintf(time, "%d%c%d", hour,':',);
-	return time;
+		if(errno!=0) err=errno;
+	}while((min<0||min>59)&&err==0);
+	if(err!=0){ 
+		printf("error: %s",strerror(err));
+		return "-1";
+	}
+	else{
+		err=0;
+		do{
+			printf();
+			scanf("%d",&hour);
+			if(errno!=0) err=errno;
+		}while((hour<0||hour>23)&&err==0);
+		if(err!=0){
+			printf("error: %s",strerror(err));
+			return "-1";
+		}
+		else{
+			sprintf(time, "%d%c%d", hour,':',);
+			return time;
+		}
+	}
 }
 
 char* addOnjct(){
 	char* obj;
 	printf();
 	scanf("%s",&obj);
+	if(errno!=0)
+	{
+		printf("error: %s", strerror(errno));
+		return "-1";
+	}
+	else
 	return obj; 
 }
 
 char* addApplicant(){
-	char* applicant
+	char* applicant;
+	printf();
+	scanf("%s", &applicant);
+	if(errno!=0)
+	{
+		printf("error: %s",strerror(errno));
+		return "-1";
+	}
+	else return applicant;
 }
 
 char* addApplication(){
 	char* app;
 	printf();
 	scanf("%s",&app);
+	if(errno!=0)
+	{
+		printf("error: %s",strerror(errno));
+		return "-1";
+	}
+	else
 	return app;
 }
 
