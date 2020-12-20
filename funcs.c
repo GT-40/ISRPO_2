@@ -101,7 +101,7 @@ char* addTime(){
 	}
 }
 
-char* addOnjct(){
+char* addObjct(){
 	char* obj;
 	printf();
 	scanf("%s",&obj);

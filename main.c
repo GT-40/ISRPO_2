@@ -89,20 +89,10 @@ int main(){
 	else if(command==3){}
 	else if(command==4){}
 	}while(command!=5)
+
+	return 0;
 }
 
-Data addAppData(int i){
-	Data appData;
-        char* date;
-	char* time;
-	char* object;
-	char* applicant;
-	char* application;
-	char* answerDate;
-	char* answerText;
 
-	appData.ID = i;
-	appData.date = addDate();
- 	appData.time = addTime();
-	appData.object	
-}
+
+
