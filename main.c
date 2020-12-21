@@ -3,25 +3,15 @@
 #include<stdbool.h>
 #include<string.h>
 #include<stdlib.h>
-
-struct Data{
-	int ID;
-	char* date;
-	char* time;
-	char* object;
-	char* applicant;
-	char* applcation;
-	char* answerDate;
-	char* answerText;
-
-}
+#include"addFunc.h"
+#include"funcs.h"
 
 struct list{
-	Data d;
-	list *next;
-}
+	struct Data d;
+	struct list *next;
+};
 
-list *init(Data _d){
+struct list *init(struct Data _d){
 	struct list *head;
 	head=(struct list*)malloc(sizeof(struct list));
 	head->d=_d;
@@ -29,66 +19,109 @@ list *init(Data _d){
 	return head;
 }
 
-list *add(Data _d, *lastElem){
+struct list *add(struct Data _d,struct list *lastElem){
 	struct list *newOne;
 	newOne=(struct list*)malloc(sizeof(struct list));
-	newOnw=->d=_d;
+	newOne->d=_d;
 	newOne->next=NULL;
 	lastElem->next=newOne;
 	return newOne;
 }
 
-void *delete(list *head, int &_d){
-	if(*head==0){
-		return;
-	}
-	list *t = *head;
-	if(t->d.ID==_d){
-		*head=t->next;
-		delete t;
-		return;
-	}
-	list *t1=t->next;
-	while(t1)
-	{
-		if(t1->d.ID==_d)
-		{
-			t->next=t1->next;
-			delete t1;
-			return;
+void *delete(struct list *head, int _d){
+	if(head!=NULL){
+		struct list *t = head;
+		if(t->d.ID==_d){
+			head=t->next;
+			free(t);
 		}
+		struct list *t1=t->next;
+		while(t1!=NULL)
+		{
+			if(t1->d.ID==_d)
+			{
+				t->next=t1->next;
+				free(t1);
+			}
+		}
+	}
+	else
+	{
+		printf("Список пуст");
 	}
 }
 
-//добавить функцию print для списка
-
-list *find(list *head, int &_d) //изенить тип на void
+void *findAndChange(struct list *head, int _d)
 {
-	list *p = head;
-	while(p)
+	struct list *p = head;
+	while(p!=NULL)
 	{
 		if(p->d.ID==_d)
-			return p; //addData для изменения вмсето return
+			p->d=addData(_d);
 		p=p->next;
 	}
-	return 0;// здесть return оставить пустым
+}
+
+void PrintList(struct list *head)
+{
+	struct list *p = head;
+	while(p!=NULL){
+		printf("%d\n%s\n%s\n%s\n%s\n%s\n%s\n%s",p->d.ID, p->d.date, p->d.time, p->d.object, p->d.applicant, p->d.application, p->d.answerDate, p->d.answerText);
+		p=p->next;
+	}
 }
 
 int main(){
 	int command;
 	int i=-1;
 	int err;
-	printf();
+	int ID;
+	struct list* head=NULL;
+	struct list* lastItem=NULL;
+	struct Data d;
+	printf("Выберите команду\n1-добавить\n2-удалить\n3-изменить\n4-вывести на экран\n5-выход");
 	do{
 	do{
-		scanf();
+		scanf("%d",&command);
 		if(errno!=0)err=errno;
-	}while(command<1||)command>5
-	if(command==1){}
-	else if(command==2){}
-	else if(command==3){}
-	else if(command==4){}
-	}while(command!=5)
+	}while(command<1||command>6);
+	if(err!=0) printf("error: %s", strerror(err));
+	else{
+		if(command==1){
+			i++;
+			d=addData(i);
+			if(d.ID==-1)printf("input failed");
+			else{
+				if(head==NULL) head=init(d);
+				else{
+					if(lastItem==NULL) lastItem=add(d,head);
+					else{
+						lastItem=add(d,lastItem);
+					}
+				}	
+			}
+		}
+		else if(command==2){
+			printf("Введите ID элемента для удаления\n");
+			scanf("%d",&ID);
+			if(errno!=0)printf("error: %s",strerror(errno));
+			else{
+				delete(head,ID);
+			}
+		}
+		else if(command==3){
+			printf("Введите ID элемента для изменения");
+			scanf("%d",&ID);
+			if(errno!=0) printf("error: %s", strerror(errno));
+			else{
+				findAndChange(head, ID);
+			}
+		}
+		else if(command==4){ 
+			PrintList(head);
+		}
+	}
+	}while(command!=5);
 
 	return 0;
 }

@@ -6,8 +6,8 @@
 #include"funcs.h"
 
 
-Data addData(int i){
-	Data d;
+struct Data addData(int i){
+        struct Data d;
 	char* date;
 	char* time;
 	char* object;
@@ -32,14 +32,14 @@ Data addData(int i){
 					application=addApplication();
 					if(application=="-1") fail = true;
 					else{
-						printf();
+						printf("Ввод даты ответа\n");
 						answerDate=addDate;
 						if(answerDate=="-1") fail= true;
 						else{
-							printf();
+							printf("Ввод текста ответа\n");
 							answerText=addApplication;
 							if(answerText=="-1") fail=true;
-							else if(fail==true) return NULL;
+							else if(fail==true) d.ID = -1;
 							else{
 								d.ID=i;
 								d.date=date;

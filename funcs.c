@@ -4,6 +4,19 @@
 #include <string.h>
 #include<stdlib.h>
 #include<unistd.h>
+
+struct Data
+{
+	int ID;
+	char* date;
+	char* time;
+	char* object;
+	char* applicant;
+	char* application;
+	char* answerDate;
+	char* answerText;
+};
+
 char* addDate(){
 	char* date;
 	int err;
@@ -75,7 +88,7 @@ char* addTime(){
 	int min;
 	int err;
 	do{
-		printf();
+		printf("Введите минуты: ");
 		scanf("%d",&min);
 		if(errno!=0) err=errno;
 	}while((min<0||min>59)&&err==0);
@@ -86,7 +99,7 @@ char* addTime(){
 	else{
 		err=0;
 		do{
-			printf();
+			printf("Введите часы: ");
 			scanf("%d",&hour);
 			if(errno!=0) err=errno;
 		}while((hour<0||hour>23)&&err==0);
@@ -95,7 +108,7 @@ char* addTime(){
 			return "-1";
 		}
 		else{
-			sprintf(time, "%d%c%d", hour,':',);
+			sprintf(time, "%d%c%d", hour,':',min);
 			return time;
 		}
 	}
@@ -103,8 +116,8 @@ char* addTime(){
 
 char* addObjct(){
 	char* obj;
-	printf();
-	scanf("%s",&obj);
+	printf("Укажите объект: ");
+	scanf("%s",obj);
 	if(errno!=0)
 	{
 		printf("error: %s", strerror(errno));
@@ -116,8 +129,8 @@ char* addObjct(){
 
 char* addApplicant(){
 	char* applicant;
-	printf();
-	scanf("%s", &applicant);
+	printf("Укажите заявителя: ");
+	scanf("%s", applicant);
 	if(errno!=0)
 	{
 		printf("error: %s",strerror(errno));
@@ -128,8 +141,8 @@ char* addApplicant(){
 
 char* addApplication(){
 	char* app;
-	printf();
-	scanf("%s",&app);
+	printf("Текст:\n");
+	scanf("%s",app);
 	if(errno!=0)
 	{
 		printf("error: %s",strerror(errno));
