@@ -4,6 +4,7 @@
 #include<string.h>
 #include<stdbool.h>
 #include"funcs.h"
+#include"funs1.h"
 
 
 struct Data addData(int i){
@@ -18,27 +19,27 @@ struct Data addData(int i){
 	bool fail=false;
 
 	date=addDate();
-	if(date=="-1") fail = true;
+	if(strcmp(date,"-1")==0) fail = true;
 	else{
 		time = addTime();
-		if(time=="-1") fail = true;
+		if(strcmp(time,"-1")==0) fail = true;
 		else{
 			object = addObjct();
-			if(object=="-1") fail = true;
+			if(strcmp(object,"-1")==0) fail = true;
 			else{
 				applicant = addApplicant();
-				if(applicant=="-1") fail=true;
+				if(strcmp(applicant,"-1")==0) fail=true;
 				else{
 					application=addApplication();
-					if(application=="-1") fail = true;
+					if(strcmp(application,"-1")==0) fail = true;
 					else{
 						printf("Ввод даты ответа\n");
 						answerDate=addDate;
-						if(answerDate=="-1") fail= true;
+						if(strcmp(answerDate,"-1")==0) fail= true;
 						else{
 							printf("Ввод текста ответа\n");
 							answerText=addApplication;
-							if(answerText=="-1") fail=true;
+							if(strcmp(answerText,"-1")==0) fail=true;
 							else if(fail==true) d.ID = -1;
 							else{
 								d.ID=i;
